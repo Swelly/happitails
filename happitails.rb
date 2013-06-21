@@ -37,8 +37,9 @@ def list_dogs(adoptable_dogs)
 end
 
 def list_clients (clients)
-  clients.each {|client|
-    puts client }
+  clients.each do |client|
+    puts client
+  end
 end
 
 adoptable_dogs = []
