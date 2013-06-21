@@ -1,12 +1,16 @@
 class Client
-  attr_accessor :name, :age, :gender, :num_kids, :num_of_dogs, :avail_dog
+  attr_accessor :name, :age, :gender, :num_kids, :num_of_dogs
   def initialize(name, age, gender, num_kids, num_of_dogs)
     @name = name
     @age = age
     @gender = gender
     @num_kids = num_kids
     @num_of_dogs = num_of_dogs
-    @avail_dog = []
+  end
+
+  def give_dog(name, breed, age, gender)
+    puts "#{name}, a #{age} year-old #{breed} entered HappiTails\n\n"
+    return Dog.new(name, breed, age, gender, favorite_toy)
   end
 end
 
@@ -19,50 +23,45 @@ class Dog
     @gender = gender
     @favorite_toy = favorite_toy
   end
-end
 
-class Shelter
-  attr_accessor :client_list, :dogs_to_adopt
-  def initialize()
-    @dogs_to_adopt = []
-    @client_list = []
+  def to_s
+    dog = "#{name}, #{breed}, #{age}, #{gender} "
+    return dog
   end
 end
 
+#Removed Shelter for bare functions
 
+def list_dogs(adoptable_dogs)
+  adoptable_dogs.each {|dog| puts dog}
+end
 
-happi_tails = Shelter.new
-#Shelter has a few animals to start
-happi_tails.dogs_to_adopt << Dog.new("Toto", "Doberman", 4, "Male", "Grass")
-happi_tails.dogs_to_adopt << Dog.new("Gogo", "Mastiff", 2, "Male", "Deer Leg")
-happi_tails.dogs_to_adopt << Dog.new("Coco", "Chow Chow", 6, "Female", "Bone")
-#Shelter also has a few clients as well
+def list_clients (clients)
+  clients.each {|client|
+    puts client }
+end
 
-#Kevon comes to HappiTails with his dog Momo
-happi_tails.client_list << client_1 = Client.new("Kevon", 23, "Male", 0, 1)
-happi_tails.client_list << client_2 = Client.new("Rachael", 30, "Female", 2, 0)
-happi_tails.client_list << client_3 = Client.new("Wyeth", 31, "Male", 1, 0)
+adoptable_dogs = []
+list_clients = []
 
-client_1.avail_dog << Dog.new("Momo", "Poodle", 3, "Female", "Tennis Ball")
+#Shelter has a few clients already
+list_clients << Client.new("Kevon", 23, "male", 0, 1)
+list_clients << Client.new("Sarah", 20, "female", 0, 0)
+list_clients << Client.new("Brenda", 30, "female", 2, 2)
 
-#happi_tails.dogs_to_adopt << client_1.avail_dog
+#Shelter has a few dogs
+adoptable_dogs << Dog.new("Toto", "Doberman", 4, "Male", "Grass")
+adoptable_dogs << Dog.new("Gogo", "Mastiff", 2, "Male", "Deer Leg")
+adoptable_dogs << Dog.new("Coco", "Chow Chow", 6, "Female", "Bone")
 
-puts "\nHere are our current dogs to adopt: "
-happi_tails.dogs_to_adopt.each {|dog|
-  puts "_________________________\n Dog Name- " + dog.name;
-  puts " Breed- " + dog.breed;
-  puts " Age- " + dog.age.to_s;
-  puts " Gender- " + dog.gender;
-  puts " Toy of choice- " + dog.favorite_toy
-}
+puts "\nHere are our current dogs up for adoption~ "
+list_dogs(adoptable_dogs)
 
-puts "_________________________\nHere are our current clients: "
-happi_tails.client_list.each {|client|
-  puts "\nClient name- " + client.name;
-  puts "Name- " + client.name;
-  puts "Age- " + client.age.to_s;
-  puts "Gender- " + client.gender.to_s;
-  puts "Number of children- " + client.num_kids.to_s
-  puts "Number of dogs- " + client.num_of_dogs.to_s
-  puts "Available dog- " + client.avail_dog.to_s
-}
+#need this to allow kevon to give dog to adoptable_dogs
+kevon = Client.new("Kevon", 23, "male", 0, 1)
+
+puts "\nOh wait! Kevon is giving his dog to the shelter..."
+adoptable_dogs << kevon.give_dog("Momo", "Poodle", 3, "Female")
+
+puts "\nHere are our current clients: "
+list_clients(list_clients)
