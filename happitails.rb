@@ -8,7 +8,7 @@ class Client
     @num_of_dogs = num_of_dogs
   end
 
-  def give_dog(name, breed, age, gender)
+  def give_dog(name, breed, age, gender, favorite_toy)
     puts "#{name}, a #{age} year-old #{breed} entered HappiTails\n\n"
     return Dog.new(name, breed, age, gender, favorite_toy)
   end
@@ -61,7 +61,7 @@ list_dogs(adoptable_dogs)
 kevon = Client.new("Kevon", 23, "male", 0, 1)
 
 puts "\nOh wait! Kevon is giving his dog to the shelter..."
-adoptable_dogs << kevon.give_dog("Momo", "Poodle", 3, "Female")
+adoptable_dogs << kevon.give_dog("Momo", "Poodle", 3, "Female", "Tennis Ball")
 
 puts "\nHere are our current clients: "
 list_clients(list_clients)
