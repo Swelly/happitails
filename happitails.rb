@@ -37,7 +37,8 @@ end
 #Removed Shelter for bare functions
 
 def list_dogs(adoptable_dogs)
-  adoptable_dogs.each {|dog| puts dog}
+  adoptable_dogs.each {|dog|
+    puts dog}
 end
 
 def list_clients (clients)
